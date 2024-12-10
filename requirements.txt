@@ -6,8 +6,8 @@ pydantic
 pydantic_settings
 soundfile
 starlette
-torch<=2.3
-torchaudio
+torch==2.3.0
+torchaudio==2.3.0
 uvicorn
 addict
 datasets==2.21.0
@@ -16,3 +16,4 @@ simplejson
 sortedcontainers
 websockets
 loguru
+pydub
