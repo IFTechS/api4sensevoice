@@ -17,3 +17,5 @@ sortedcontainers
 websockets
 loguru
 pydub
+onnx
+onnxconverter-common
