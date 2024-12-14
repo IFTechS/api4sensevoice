@@ -388,8 +388,8 @@ async def websocket_endpoint(websocket: WebSocket):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run the FastAPI app with a specified port.")
     parser.add_argument('--port', type=int, default=8765, help='Port number to run the FastAPI app on.')
-    # parser.add_argument('--certfile', type=str, default='path_to_your_SSL_certificate_file.crt', help='SSL certificate file')
-    # parser.add_argument('--keyfile', type=str, default='path_to_your_SSL_certificate_file.key', help='SSL key file')
+    parser.add_argument('--certfile', type=str, default='/etc/ssl/certs/server.crt', help='SSL certificate file')
+    parser.add_argument('--keyfile', type=str, default='/etc/ssl/private/server.key', help='SSL key file')
     args = parser.parse_args()
-    # uvicorn.run(app, host="0.0.0.0", port=args.port, ssl_certfile=args.certfile, ssl_keyfile=args.keyfile)
-    uvicorn.run(app, host="0.0.0.0", port=args.port)
+    
+    uvicorn.run(app, host="0.0.0.0", port=args.port, ssl_certfile=args.certfile, ssl_keyfile=args.keyfile)
