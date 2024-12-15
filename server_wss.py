@@ -294,7 +294,7 @@ async def websocket_endpoint(websocket: WebSocket):
         buffer = b""
         while True:
             data = await websocket.receive_bytes()
-            # logger.info(f"received {len(data)} bytes")
+            logger.info(f"received {len(data)} bytes")
 
             
             buffer += data
@@ -316,8 +316,8 @@ async def websocket_endpoint(websocket: WebSocket):
                 audio_buffer = audio_buffer[chunk_size:]
                 audio_vad = np.append(audio_vad, chunk)
                 
-                # with open('chunk.pcm', 'ab') as f:
-                #     logger.debug(f'write {f.write(chunk)} bytes to `chunk.pcm`')
+                #with open('chunk.pcm', 'ab') as f:
+                    #logger.debug(f'write {f.write(chunk)} bytes to `chunk.pcm`')
                     
                 if last_vad_beg > 1:
                     if sv:
@@ -342,7 +342,7 @@ async def websocket_endpoint(websocket: WebSocket):
                         await websocket.send_json(response.model_dump())
 
                 res = model_vad.generate(input=chunk, cache=cache, is_final=False, chunk_size=config.chunk_size_ms)
-                # logger.info(f"vad inference: {res}")
+                #logger.info(f"vad inference: {res}")
                 if len(res[0]["value"]):
                     vad_segments = res[0]["value"]
                     for segment in vad_segments:
@@ -362,6 +362,7 @@ async def websocket_endpoint(websocket: WebSocket):
                             audio_vad = audio_vad[end:]
                             last_vad_beg = last_vad_end = -1
                             hit = False
+                            print(result)
                             
                             if  result is not None:
                                 response = TranscriptionResponse(
